@@ -1,5 +1,4 @@
 from collections import defaultdict
-from PIL import Image
 from pytesseract import image_to_data, Output
 
 import fiftyone as fo
