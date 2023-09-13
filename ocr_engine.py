@@ -27,7 +27,8 @@ def get_ocr_detections(sample):
     word_detections = []
     blocks = defaultdict(list)
 
-    # Process each word to create word-level detections and group by block for block-level detections
+    # Process each word to create word-level detections and
+    # group by block for block-level detections
     n = len(levels)
     w, h = sample.metadata.width, sample.metadata.height
     for i in range(n):
