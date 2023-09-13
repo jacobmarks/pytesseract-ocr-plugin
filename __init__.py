@@ -38,7 +38,10 @@ class OCR(foo.Operator):
         inputs = types.Object()
         form_view = types.View(
             label="OCR",
-            description="Run optical character recognition on your images to detect text with PyTesseract",
+            description=(
+                "Run optical character recognition on your images to"
+                "detect text with PyTesseract"
+            ),
         )
         return types.Property(inputs, view=form_view)
 
