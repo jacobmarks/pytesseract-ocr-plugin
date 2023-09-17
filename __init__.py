@@ -16,12 +16,13 @@ from fiftyone.operators import types
 class OCR(foo.Operator):
     @property
     def config(self):
-        return foo.OperatorConfig(
+        _config = foo.OperatorConfig(
             name="run_ocr_engine",
             label="OCR: run optical character recognition on your images",
-            icon="/assets/icon_light.svg",
             dynamic=True,
         )
+        _config.icon = "/assets/icon_light.svg"
+        return _config
 
     def resolve_delegation(self, ctx):
         return True
