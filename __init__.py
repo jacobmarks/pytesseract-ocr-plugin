@@ -23,6 +23,9 @@ class OCR(foo.Operator):
             dynamic=True,
         )
 
+    def resolve_delegation(self, ctx):
+        return True
+
     def resolve_placement(self, ctx):
         return types.Placement(
             types.Places.SAMPLES_GRID_ACTIONS,
