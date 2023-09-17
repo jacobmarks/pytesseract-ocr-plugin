@@ -1,33 +1,31 @@
-## Visual Question Answering Plugin
+## PyTesseract Optical Character Recognition Plugin
 
-This plugin is a Python plugin that allows you to answer visual questions about images in your dataset!
+This plugin is a Python plugin that allows you to perform optical character
+recognition on documents using PyTesseract — the Python bindings for the
+Tesseract OCR engine!
 
 It demonstrates how to do the following:
 
-- Run a local model on your dataset
-- Use `ctx.selected` to operate on only selected samples
-- Pass data from `execute()` to `resolve_output()`
-
-### Supported Models
-
-This version of the plugin supports the default Vision Language Transformer (ViLT) model used in the [Visual Question Answering pipeline](https://huggingface.co/tasks/visual-question-answering) in the Hugging Face transformers library.
-
-Feel free to fork this plugin and add support for other models!
+- Use FiftyOne for natural language document understanding
+- Place your operator as a button in the App via a Python plugin
+- Delegate the execution of time-consuming tasks
 
 ## Installation
 
 ```shell
-fiftyone plugins download https://github.com/jacobmarks/vqa-plugin
+fiftyone plugins download https://github.com/jacobmarks/pytesseract-ocr-plugin
 ```
 
-Install the Hugging Face transformers library:
+You will also need to install the plugin's requirements:
 
 ```shell
-pip install transformers
+pip install -r requirements.txt
 ```
 
 ## Operators
 
-### `answer_visual_question`
+### `run_ocr_engine`
 
-- Generates an image from a text prompt and adds it to the dataset
+- Runs the PyTesseract OCR engine on the documents in the dataset, converts the
+  results to FiftyOne labels, and stores individual word predictions as well
+  as block-level predictions on the dataset.
