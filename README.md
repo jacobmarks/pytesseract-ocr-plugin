@@ -37,3 +37,4 @@ pip install -r requirements.txt
 
 <img width="1727" alt="funsd_block_predictions" src="https://github.com/jacobmarks/pytesseract-ocr-plugin/assets/12500356/a7b6e81f-7a1e-4663-8ae9-c32c3266015d">
 
+💡 Once you've generated OCR predictions, you can search through them using the [Keyword Search plugin](https://github.com/jacobmarks/keyword-search-plugin)!
