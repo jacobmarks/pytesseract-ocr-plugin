@@ -48,7 +48,7 @@ def _execution_mode(ctx, inputs):
 def _list_target_views(ctx, inputs):
     has_view = ctx.view != ctx.dataset.view()
     has_selected = bool(ctx.selected)
-    default_target = None
+    default_target = "DATASET"
     if has_view or has_selected:
         target_choices = types.RadioGroup()
         target_choices.add_choice(
@@ -79,6 +79,8 @@ def _list_target_views(ctx, inputs):
             default=default_target,
             view=target_choices,
         )
+    else:
+        ctx.params["target"] = default_target
 
 
 def _get_target_view(ctx, target):
@@ -104,7 +106,6 @@ class OCR(foo.Operator):
 
     def resolve_delegation(self, ctx):
         return ctx.params.get("delegate", False)
-        # return True
 
     def resolve_placement(self, ctx):
         return types.Placement(
