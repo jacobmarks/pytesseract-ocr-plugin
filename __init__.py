@@ -197,7 +197,6 @@ class OCR(foo.Operator):
         view = _get_target_view(ctx, ctx.params["target"])
 
         word_preds_field, block_preds_field = _get_prediction_fields(ctx)
-        # block_preds_field = "my_blocks"
 
         with add_sys_path(os.path.dirname(os.path.abspath(__file__))):
             # pylint: disable=no-name-in-module,import-error
