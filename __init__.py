@@ -144,6 +144,22 @@ def _handle_prediction_fields(ctx, inputs):
             required=True,
         )
 
+    inputs.bool(
+        "store_text_as_labels",
+        label="Store text as labels?",
+        default=True,
+        view=types.SwitchView(space=4),
+    )
+
+    if not ctx.params.get("store_text_as_labels", True):
+        inputs.str(
+            "text_field",
+            label="Text field",
+            default="ocr_text",
+            description="The embedded field in which to store the OCR text",
+            required=True,
+        )
+
 
 def _get_prediction_fields(ctx):
     word_preds_field = ctx.params.get("word_predictions_field", None)
@@ -197,13 +213,16 @@ class OCR(foo.Operator):
         view = _get_target_view(ctx, ctx.params["target"])
 
         word_preds_field, block_preds_field = _get_prediction_fields(ctx)
+        text_field = ctx.params.get("text_field", None)
 
         with add_sys_path(os.path.dirname(os.path.abspath(__file__))):
             # pylint: disable=no-name-in-module,import-error
             from ocr_engine import get_ocr_detections
 
             for sample in view.iter_samples(autosave=True):
-                word_dets, block_dets = get_ocr_detections(sample)
+                word_dets, block_dets = get_ocr_detections(
+                    sample, text_field=text_field
+                )
                 if word_preds_field:
                     sample[word_preds_field] = word_dets
                 if block_preds_field:

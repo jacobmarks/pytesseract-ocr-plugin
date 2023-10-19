@@ -10,7 +10,7 @@ def get_filepath(sample):
     )
 
 
-def get_ocr_detections(sample):
+def get_ocr_detections(sample, text_field=None):
     fp = get_filepath(sample)
     preds = image_to_data(fp, output_type=Output.DICT)
 
@@ -37,7 +37,6 @@ def get_ocr_detections(sample):
 
         # Word-level detection
         word_det = fo.Detection(
-            label=texts[i],
             bounding_box=normalized_bbox,
             level=levels[i],
             paragraph=par_nums[i],
@@ -46,6 +45,11 @@ def get_ocr_detections(sample):
             block=block_num,
             confidence=confidences[i],
         )
+        if text_field:
+            word_det[text_field] = texts[i]
+            word_det.label = "text"
+        else:
+            word_det.label = texts[i]
         word_detections.append(word_det)
 
         # Group by block for later processing
@@ -63,10 +67,14 @@ def get_ocr_detections(sample):
         block_text = " ".join(det[1] for det in detections)
 
         block_det = fo.Detection(
-            label=block_text,
             bounding_box=block_bbox,
             block=block_num,
         )
+        if text_field:
+            block_det[text_field] = block_text
+            block_det.label = "text"
+        else:
+            block_det.label = block_text
         block_detections.append(block_det)
 
     word_detections = fo.Detections(detections=word_detections)
