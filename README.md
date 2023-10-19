@@ -2,6 +2,10 @@
 
 <img width="1727" alt="funsd_predictions" src="https://github.com/jacobmarks/pytesseract-ocr-plugin/assets/12500356/1bda669c-f2f8-456f-912f-c3f6a6a0fadd">
 
+### Updates
+
+- **2023-10-19**: Added support for customizing prediction fields, and embedded field for OCR text.
+
 This plugin is a Python plugin that allows you to perform optical character
 recognition on documents using PyTesseract — the Python bindings for the
 Tesseract OCR engine!
