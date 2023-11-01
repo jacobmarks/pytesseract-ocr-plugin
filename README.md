@@ -10,11 +10,8 @@ This plugin is a Python plugin that allows you to perform optical character
 recognition on documents using PyTesseract — the Python bindings for the
 Tesseract OCR engine!
 
-It demonstrates how to do the following:
-
-- Use FiftyOne for natural language document understanding
-- Place your operator as a button in the App via a Python plugin
-- Delegate the execution of time-consuming tasks
+## Watch On Youtube
+[![Video Thumbnail](https://img.youtube.com/vi/jnNPGrM6Wr4/0.jpg)](https://www.youtube.com/watch?v=jnNPGrM6Wr4&list=PLuREAXoPgT0RZrUaT0UpX_HzwKkoB-S9j&index=6)
 
 ## Installation
 
