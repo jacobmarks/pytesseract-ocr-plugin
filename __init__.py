@@ -45,54 +45,6 @@ def _execution_mode(ctx, inputs):
         )
 
 
-def _list_target_views(ctx, inputs):
-    has_view = ctx.view != ctx.dataset.view()
-    has_selected = bool(ctx.selected)
-    default_target = "DATASET"
-    if has_view or has_selected:
-        target_choices = types.RadioGroup()
-        target_choices.add_choice(
-            "DATASET",
-            label="Entire dataset",
-            description="Run OCR on the entire dataset",
-        )
-
-        if has_view:
-            target_choices.add_choice(
-                "CURRENT_VIEW",
-                label="Current view",
-                description="Run OCR on the current view",
-            )
-            default_target = "CURRENT_VIEW"
-
-        if has_selected:
-            target_choices.add_choice(
-                "SELECTED_SAMPLES",
-                label="Selected samples",
-                description="Run OCR on the selected samples",
-            )
-            default_target = "SELECTED_SAMPLES"
-
-        inputs.enum(
-            "target",
-            target_choices.values(),
-            default=default_target,
-            view=target_choices,
-        )
-    else:
-        ctx.params["target"] = default_target
-
-
-def _get_target_view(ctx, target):
-    if target == "SELECTED_SAMPLES":
-        return ctx.view.select(ctx.selected)
-
-    if target == "DATASET":
-        return ctx.dataset
-
-    return ctx.view
-
-
 def _handle_prediction_fields(ctx, inputs):
     obj = types.Object()
     obj.bool(
@@ -202,7 +154,7 @@ class OCR(foo.Operator):
             ),
         )
         _execution_mode(ctx, inputs)
-        _list_target_views(ctx, inputs)
+        inputs.view_target(ctx)
         _handle_prediction_fields(ctx, inputs)
         return types.Property(inputs, view=form_view)
 
@@ -210,7 +162,7 @@ class OCR(foo.Operator):
         dataset = ctx.dataset
         dataset.compute_metadata()
 
-        view = _get_target_view(ctx, ctx.params["target"])
+        view = ctx.target_view()
 
         word_preds_field, block_preds_field = _get_prediction_fields(ctx)
         text_field = ctx.params.get("text_field", None)

@@ -1,7 +1,7 @@
 fiftyone:
-  version: ">=0.22.0"
+  version: ">=0.23.5"
 name: "@jacobmarks/pytesseract_ocr"
-version: "1.0.3"
+version: "1.0.4"
 description: "Run optical character recognition with PyTesseract!"
 url: "https://github.com/jacobmarks/pytesseract-ocr-plugin/blob/main/README.md"
 operators:
