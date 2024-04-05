@@ -180,7 +180,7 @@ class OCR(foo.Operator):
                 if block_preds_field:
                     sample[block_preds_field] = block_dets
         dataset.add_dynamic_sample_fields()
-        ctx.trigger("reload_dataset")
+        ctx.ops.reload_dataset()
 
 
 def register(plugin):
